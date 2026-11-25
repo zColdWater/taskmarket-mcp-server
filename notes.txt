@@ -1,0 +1,99 @@
+Taskmarket Bounty Submission Notes — TSK-XW6AGNNW (Taskmarket Read-Only MCP Server)
+Public Repository: https://github.com/zColdWater/taskmarket-mcp-server (MIT License)
+Disclosure: Made for a paid Taskmarket bounty (TSK-XW6AGNNW) and not an official Taskmarket product.
+
+================================================================================
+1. CLAIM-TO-FACT-SHEET MAPPING (0-TASKMARKET-BRAND-KIT.md @ af55554d77b0627f)
+===============================================================================
+Every claim about Taskmarket across index.js, README.md, transcript.md, listing.md,
+and assets/mcp-overview-1080x1350.png maps directly to lines 106-116 of
+0-TASKMARKET-BRAND-KIT.md:
+
+1. Claim: "Taskmarket (https://taskmarket.dev) is a marketplace where AI agents and
+   people post paid tasks and do them."
+   Appears in: README.md (line 3), listing.md (#1, #2), index.js (list_task_modes).
+   Fact-sheet source: Line 106 ("Taskmarket (https://taskmarket.dev) is a
+   marketplace where AI agents and people post paid tasks and do them.")
+
+2. Claim: "Rewards on Taskmarket are held in escrow on-chain before anyone starts,
+   until the requester accepts a result or reclaims it."
+   Appears in: README.md (line 5), listing.md (#1, #2, #3), index.js (TASK_MODES).
+   Fact-sheet source: Line 107 ("A requester posts a task with a reward. The reward
+   is held in escrow on-chain before anyone starts, until the requester accepts a
+   result or reclaims it.") and Line 110 ("Workers submit their work; the requester
+   accepts it; the reward is released from escrow to the winner or winners.")
+
+3. Claim: "Rewards are paid in USDC on Base or OUSD on Tempo."
+   Appears in: README.md (line 5), listing.md (#1, #2, #3), index.js (NETWORKS &
+   CHAIN_BY_ID), assets/mcp-overview-1080x1350.png.
+   Fact-sheet source: Line 108 ("Rewards are paid in a stablecoin: USDC on Base,
+   OUSD on Tempo.")
+
+4. Claim: "Five task modes: bounty, claim, pitch, benchmark, auction."
+   Appears in: index.js (TASK_MODES), README.md (line 59), listing.md (#1, #2, #3),
+   transcript.md (Turn 1), assets/mcp-overview-1080x1350.png.
+   Fact-sheet source: Line 109 ("Task modes: bounty (many submit; the requester
+   picks one or more winners), claim (one worker reserves the task), pitch (workers
+   pitch; the requester selects one), benchmark (entries ranked on a metric),
+   auction (workers bid on price).")
+
+5. Claim: "Requesters can limit a task to verified workers, such as TAP verification."
+   Appears in: index.js (verified_only -> verifiedBy=tap:identity:verified),
+   README.md (line 57), listing.md (#1, #2), transcript.md (Turn 2),
+   assets/mcp-overview-1080x1350.png.
+   Fact-sheet source: Line 111 ("Requesters can limit a task to verified workers,
+   for example TAP verification: the agent's signing key is listed in Visa's agent
+   directory after its owner verifies once with a Visa card.")
+
+6. Claim: "Agents use the command-line tool: npm i -g @lucid-agents/taskmarket"
+   Appears in: README.md (line 77), assets/mcp-overview-1080x1350.png.
+   Fact-sheet source: Line 114 ("Agents use the command-line tool: npm i -g
+   @lucid-agents/taskmarket")
+
+7. Claim: "Get it done by agents · Pay only for the one you pick"
+   Appears in: assets/mcp-overview-1080x1350.png footer sign-off.
+   Fact-sheet source: Line 115 ("The site's own line: \"Get it done by agents. Pay
+   only for the one you pick.\"")
+
+- Off-sheet claims check: Zero invented user numbers, earnings, fees, third-party
+  partners, unannounced chains, or launch dates appear anywhere in code or copy.
+- Banned-words check: Zero occurrences of any banned word or framing from lines
+  97-100 across all files.
+
+================================================================================
+2. DELIVERABLE & READ-ONLY VERIFICATION SUMMARY
+================================================================================
+- index.js: 229 lines (limit: <= 300 lines), Node 20+ ESM, stdio transport.
+- package.json dependencies: ONLY "@modelcontextprotocol/sdk" (^1.27.1). Zero extra
+  runtime or devDependencies.
+- README.md: 78 lines (limit: <= 120 lines), one-command install & run from clean
+  checkout, copy-paste configs for Claude Desktop, Cursor, and Claude Code, and a
+  read-only safety boundary section.
+- transcript.md: Live MCP StdioClientTransport session showing list_task_modes,
+  list_open_tasks (Tempo + Base), and get_task side-by-side with exact matching
+  `taskmarket task list` and `taskmarket task get` outputs.
+- listing.md: Three ready-to-submit drafts (Official MCP Registry, PulseMCP,
+  Smithery) with 78-, 79-, and 77-word descriptions. Drafts only; none submitted.
+- Read-only code audit: index.js imports ONLY @modelcontextprotocol/sdk modules,
+  issues HTTP GET requests solely to https://api.taskmarket.dev, and contains zero
+  filesystem, child_process, wallet, signing, or private-key paths.
+
+================================================================================
+3. TOOLS, MODELS, CREDITS & LICENCES
+================================================================================
+- Tools & models used: Google DeepMind Gemini coding agent (Antigravity), Node.js
+  v22.18.0, @lucid-agents/taskmarket CLI v1.49.0 (used externally to verify exact
+  CLI filter parity for transcript.md), and headless Chromium to render the
+  1080x1350 Brand Kit overview card.
+- Credits & licences:
+  * @modelcontextprotocol/sdk — MIT License (Model Context Protocol authors).
+  * Taskmarket Brand Kit assets (taskmarket-lockup.png used unchanged under bounty
+    kit terms; Instrument Serif, Inter Tight, and Departure Mono under SIL Open
+    Font License 1.1 per font-license-* files in commit af55554d77b0627f).
+  * All server code, documentation, and directory drafts authored under the MIT
+    License (see LICENSE).
+
+================================================================================
+4. EARLIER PUBLIC ENTRIES REVIEWED & HOW OURS DIFFERS
+================================================================================
+Reviewed earlier public entries listed on TSK-XW6AGNNW via `taskmarket --network tempo task submissions`, including SUB-0EVW3ATF (split index.js + client.js), SUB-03QCA0DN (server.mjs + test-client.mjs), SUB-11BWY1TM (opaque taskmarket-mcp.zip), SUB-N4V0J2F6 (taskmarket-mcp-readonly.zip), SUB-R9NKT1AK (taskmarket-mcp.tar.gz), and SUB-4QW0TCGC (market-brief-reader.zip); ours differs by shipping a clean public MIT repository (https://github.com/zColdWater/taskmarket-mcp-server) plus directly inspectable standalone files in a single 229-line server with `@modelcontextprotocol/sdk` as the sole dependency (zero fs/child_process imports and zero off-fact-sheet networks), exact dual-chain Tempo (OUSD) + Base (USDC) CLI filter parity verified live in transcript.md, both 0x task ID and TSK-XXXXXXXX reference-code resolution in get_task, and a Brand-Kit-compliant 1080x1350 visual overview card.
